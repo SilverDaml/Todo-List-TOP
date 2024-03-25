@@ -129,6 +129,17 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/blank-project-load.js":
+/*!***********************************!*\
+  !*** ./src/blank-project-load.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   blankProjectLoad: () => (/* binding */ blankProjectLoad)\n/* harmony export */ });\n/* harmony import */ var _modules_todoCreator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/todoCreator.js */ \"./src/modules/todoCreator.js\");\n\r\n\r\nconst blankProjectLoad = () => {\r\n    const todoCreator = new _modules_todoCreator_js__WEBPACK_IMPORTED_MODULE_0__.TodoCreator('todo-container');\r\n\r\n    // Create a default todo item\r\n    const defaultTodo = new TodoItem(\"Default Todo\", \"This is a default todo item\", \"2024-03-25\", \"Low\");\r\n    \r\n    // Render the default todo item\r\n    todoCreator.renderTodoItem(defaultTodo);\r\n\r\n    // Button to add new todo items\r\n    const addTodoBtn = document.createElement('button');\r\n    addTodoBtn.textContent = 'Add Todo';\r\n    addTodoBtn.addEventListener('click', () => {\r\n        const newTodo = new TodoItem(\"New Todo\", \"Description goes here\", \"2024-03-26\", \"Medium\");\r\n        todoCreator.renderTodoItem(newTodo);\r\n    });\r\n\r\n    // Append the button to the container\r\n    const todoContainer = document.getElementById('todo-container');\r\n    if (todoContainer) {\r\n        todoContainer.appendChild(addTodoBtn);\r\n    } else {\r\n        console.error(\"Container 'todo-container' not found\");\r\n    }\r\n}\r\n\r\nclass TodoItem {\r\n    constructor(title, description, dueDate, priority) {\r\n        this.title = title;\r\n        this.description = description;\r\n        this.dueDate = dueDate;\r\n        this.priority = priority;\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack://to-do-list/./src/blank-project-load.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -136,7 +147,18 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\r\n\r\n\r\n function component() {\r\n   const element = document.createElement('div');\r\n\r\n  // Lodash, now imported by this script\r\n   element.innerHTML = lodash__WEBPACK_IMPORTED_MODULE_0___default().join(['Hello', 'webpack'], ' ');\r\n   element.classList.add('hello');\r\n\r\n   return element;\r\n }\r\n\r\n document.body.appendChild(component());\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _blank_project_load__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blank-project-load */ \"./src/blank-project-load.js\");\n\r\n\r\n\r\n\r\n(0,_blank_project_load__WEBPACK_IMPORTED_MODULE_2__.blankProjectLoad)();\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/todoCreator.js":
+/*!************************************!*\
+  !*** ./src/modules/todoCreator.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   TodoCreator: () => (/* binding */ TodoCreator)\n/* harmony export */ });\nclass TodoCreator {\r\n    constructor(containerId) {\r\n        this.container = document.getElementById(containerId);\r\n        if (!this.container) {\r\n            throw new Error(`Container with ID '${containerId}' not found`);\r\n        }\r\n    }\r\n\r\n    renderTodoItem(todoItem) {\r\n        const { title, description, dueDate, priority } = todoItem;\r\n\r\n        // Create todo item elements\r\n        const todoElement = document.createElement('div');\r\n        todoElement.classList.add('todo-item');\r\n\r\n        const titleElement = document.createElement('h2');\r\n        titleElement.textContent = `Title: ${title}`;\r\n\r\n        const descriptionElement = document.createElement('p');\r\n        descriptionElement.textContent = `Description: ${description}`;\r\n\r\n        const dueDateElement = document.createElement('p');\r\n        dueDateElement.textContent = `Due date: ${dueDate}`;\r\n\r\n        const priorityElement = document.createElement('span');\r\n        priorityElement.textContent = `Priority: ${priority}`;\r\n\r\n        // Append elements to todo item container if it exists\r\n        if (this.container) {\r\n            todoElement.appendChild(titleElement);\r\n            todoElement.appendChild(descriptionElement);\r\n            todoElement.appendChild(dueDateElement);\r\n            todoElement.appendChild(priorityElement);\r\n\r\n            // Append todo item to the container\r\n            this.container.appendChild(todoElement);\r\n        } else {\r\n            console.error(\"Container not found\");\r\n        }\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack://to-do-list/./src/modules/todoCreator.js?");
 
 /***/ })
 
